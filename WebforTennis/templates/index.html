@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tennis Video Classification</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1>Tennis Video Classification</h1>
+
+
+      <form name = "passdata" action="." method="POST">
+
+      <label for="model">Select a Model</label>
+      <select placeholder="Enter a Model" name = "model1">                              
+          <option value="model_non_pro_epochs25">model_non_pro_epochs25</option>
+          <option value="model_pro_right_epochs25">model_pro_right_epochs5</option>                 
+      </select>
+      <label for="testclip">Choose the test Video</label>
+      <select placeholder="Choose the test Video" name = "video">  
+          <option value="NonPro.MOV">NonPro.MOV</option>
+          <option value="ProRightTest.MOV">ProRightTest.MOV</option>                 
+      </select>
+
+      <input type="submit" value = "submit">
+      <!-- <p><a class="btn btn-primary btn-lg" href="/predict" role="button">Predict Strokes</a></p> -->
+      <!-- <p><a class="btn btn-primary btn-lg" href="/predict" role="button">Predict Strokes(Pro Model)</a></p> -->
+
+      </form>
+    </div>
+    
+  </div>
+
+  
+  
+  
+  
+</body>
+
+</html>
