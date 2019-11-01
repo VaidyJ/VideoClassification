@@ -97,4 +97,3 @@ Building on the starter code:
 
 
 ____
-Farah, Pooja, Vaidy
