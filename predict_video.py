@@ -13,6 +13,7 @@ from twilio.rest import Client
 import csv
 import pandas as pd
 import numpy as np
+import datetime
 camid = 'IRNSS-1I'
 location = 'Geosynchronous / 55°E, 29° inclined orbit'
 
@@ -24,7 +25,7 @@ ap.add_argument("-l", "--label-bin", required=True,
 	help="path to  label binarizer")
 ap.add_argument("-i", "--input", required=True,
 	help="path to our input video")
-ap.add_argument("-o", "--output", required=True,
+ap.add_argument("-o", "--output", required=False,
 	help="path to our output video")
 ap.add_argument("-s", "--size", type=int, default=128,
 	help="size of queue for averaging")
@@ -128,17 +129,21 @@ while True:
         
         
 	print(label, ':' , prelabel)   
-	if label != prelabel:
-		if (i==0):
-			backhandCount += 1
-		else:
-			forehandCount += 1
+	if framecount > 10:
+		if label != prelabel:
+			if (i==0):
+				backhandCount += 1
+			else:
+				forehandCount += 1
     
-# 	text = "{} - {:.2f}%".format((label), maxprob * 100)
-	text = ""
-	text = text + "Backhand count : " + str(backhandCount) + "\n"
-	text = text + "Forehand count : " + str(forehandCount)
-	cv2.putText(output, text, (35, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 5)
+	textCategory = "{} - {:.2f}%".format((label), maxprob * 100)
+	#text = ""
+	textBackhandCount = "Backhand count : " + str(backhandCount)
+	textForehandCount = "Forehand count : " + str(forehandCount)
+	cv2.putText(output, textCategory, (35, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 5)
+	cv2.putText(output, textForehandCount, (35, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 5)
+	cv2.putText(output, textBackhandCount, (35, 150), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 5)
+	
 
 
 	prelabel = label    
@@ -149,8 +154,10 @@ while True:
 	if writer is None:
 		# initialize our video writer
 		fourcc = cv2.VideoWriter_fourcc(*"MJPG")
-		writer = cv2.VideoWriter(args["output"], fourcc, 30,
-			(W, H), True)
+		#writer = cv2.VideoWriter(args["output"] + datetime.datetime.now().strftime('%b-%d-%Y_%H%M'), fourcc, 30, (W, H), True)
+		writer = cv2.VideoWriter( "output/"+ args["input"].split('/')[1].split('.')[0] + "_" + args["model"]  + "_output" + '.MOV', fourcc, 30, (W, H), True)
+		
+		
 
 	# write the output frame to disk
 	writer.write(output)
@@ -166,6 +173,7 @@ print('Frame count', framecount)
 #print('Count label', fi_label)
 # release the file pointers
 print("[INFO] cleaning up...")
+#print( "output/"+ args["input"].split('/')[1].split('.')[0] + "_" + args["model"]  + "_output" + '.MOV')
 writer.release()
 vs.release()
 
