@@ -1,4 +1,4 @@
-# Final Project: Sports Medicine through Video Classification 
+# Sports Medicine through Video Classification 
 
 ![Tennis](https://github.com/ffidai/Final_Project/blob/master/MD/tennis.jpg)
 
