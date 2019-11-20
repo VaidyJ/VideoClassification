@@ -53,7 +53,7 @@ The model will also create an exportable Excel file of movements to visualize th
 ### CNN
 
 ![Model](https://github.com/ffidai/Final_Project/blob/master/MD/CNN.jpeg)
-https://medium.com/@RaghavPrabhu/understanding-of-convolutional-neural-network-cnn-deep-learning-99760835f148
+
 
 ## Tools Used
 
